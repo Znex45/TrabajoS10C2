@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;             // Velocidad de movimiento
+    public float speed = 5f;
+    public float jumpForce = 10f;
+
     private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private Animator anim;               // Para controlar las animaciones
-    private SpriteRenderer sr;           // Para voltear el sprite
+    private Animator anim;
+    private SpriteRenderer sr;
+
+    private bool isGrounded = true;
 
     void Start()
     {
@@ -17,31 +20,36 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //(WASD o flechas)
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        // --- Movimiento lateral ---
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        rb.linearVelocity = new Vector2(moveInput * speed, rb.linearVelocity.y);
 
-        // Guardar dire
-        moveInput = new Vector2(moveX, moveY).normalized;
+        // Animación de correr
+        anim.SetFloat("eje x", Mathf.Abs(moveInput));
 
-        // Cambiar animacion 
-        if (moveInput != Vector2.zero)
+        // Voltear sprite
+        if (moveInput > 0) sr.flipX = false;
+        else if (moveInput < 0) sr.flipX = true;
+
+        // --- Salto ---
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
-            anim.SetBool("isMoving", true);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false;
+            anim.SetBool("floor", false);  // al saltar deja de estar en el suelo
         }
 
-        // Girar 
-        if (moveX > 0) sr.flipX = false;   // la derecha
-        if (moveX < 0) sr.flipX = true;    //a la iuierda
+        // Actualizamos el parámetro floor siempre
+        anim.SetBool("floor", isGrounded);
     }
 
-    void FixedUpdate()
+    // Detecta cuando toca el suelo
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Aplicar movimiento
-        rb.linearVelocity = moveInput * speed;
+        if (collision.gameObject.CompareTag("Ground")) // asegúrate que el suelo tenga el tag "Ground"
+        {
+            isGrounded = true;
+            anim.SetBool("floor", true); // vuelve al suelo
+        }
     }
 }
