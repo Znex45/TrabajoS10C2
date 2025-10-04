@@ -74,7 +74,7 @@ public class EnemyBat : MonoBehaviour
     {
         vida -= cantidad;
 
-        if (vida <= 0)
+        if (vida == 0)
         {
             Muerte();
         }
