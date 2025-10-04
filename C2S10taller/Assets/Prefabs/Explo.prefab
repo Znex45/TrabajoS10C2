@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5431286360661287793}
   - component: {fileID: 2158679090176508908}
   - component: {fileID: 4004679804728950520}
-  - component: {fileID: 2635937775400459181}
+  - component: {fileID: 9154667083874671863}
   m_Layer: 0
   m_Name: Explo
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2635937775400459181
+--- !u!114 &9154667083874671863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2796845783447327225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24b1404aa066c745b751d6d3f694448, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c428dfdd2234848b213b021c1ae882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoDeVida: 2
+  tiempoVida: 0.5
