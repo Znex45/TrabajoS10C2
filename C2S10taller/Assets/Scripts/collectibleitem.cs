@@ -3,32 +3,66 @@ using TMPro;
 
 public class CollectibleItem : MonoBehaviour
 {
-    [SerializeField] private string itemName;   // Opcional: "Monedita", "Copo", etc. (solo informativo)
-    [SerializeField] private int itemValue; // Cuánto suma al puntaje (si <=0, se usa 1)
+    [SerializeField] private string itemName;     // "Monedita" o "Copo" (si lo dejas vacío usa el nombre del objeto)
+    [SerializeField] private int itemValue = 1;   // Puntos que suma al score (si <=0 se usa 1)
 
-    private static int score;
-    private static TMP_Text uiScore;
+    private static int monedas, copos, score;
+    private static TMP_Text uiMonedas, uiCopos, uiScore;
+
+    private const string LABEL_MONEDAS = "monedas recogidas: ";
+    private const string LABEL_COPOS = "copos recogidos: ";
+    private const string LABEL_SCORE = "SCORE: ";
 
     private static void RefrescarUI()
     {
+        // Lazy-binding de referencias UI por nombre en la jerarquía
+        if (!uiMonedas)
+        {
+            var go = GameObject.Find("TextMonedas");
+            if (go) uiMonedas = go.GetComponent<TMP_Text>();
+        }
+        if (!uiCopos)
+        {
+            var go = GameObject.Find("TextCopos");
+            if (go) uiCopos = go.GetComponent<TMP_Text>();
+        }
         if (!uiScore)
         {
-            var go = GameObject.Find("TextPuntaje"); // Asegúrate que se llame exactamente así
+            var go = GameObject.Find("TextPuntaje");
             if (go) uiScore = go.GetComponent<TMP_Text>();
         }
 
-        if (uiScore) uiScore.text = $"SCORE: {score}";
+        if (uiMonedas) uiMonedas.text = LABEL_MONEDAS + monedas;
+        if (uiCopos) uiCopos.text = LABEL_COPOS + copos;
+        if (uiScore) uiScore.text = LABEL_SCORE + score;
     }
+
+    private void Start() => RefrescarUI(); // muestra 0 al inicio
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
 
-        int delta = (itemValue <= 0) ? 1 : itemValue;
+        int puntos = (itemValue <= 0) ? 1 : itemValue;
+        string n = string.IsNullOrWhiteSpace(itemName) ? gameObject.name : itemName;
+        n = n.ToLower();
 
-        score += delta;
+        // Conteos (1 por ítem recogido)
+        if (n.Contains("moneda")) monedas += 1;
+        else if (n.Contains("copo")) copos += 1;
+
+        // Puntaje total
+        score += puntos;
+
         RefrescarUI();
-
         Destroy(gameObject);
     }
+
+    // Útil si quieres reiniciar desde un botón/otro script
+    public static void ResetAll()
+    {
+        monedas = copos = score = 0;
+        RefrescarUI();
+    }
 }
+
