@@ -13,7 +13,6 @@ public class EfectoSonido : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ControladorSonidos.Instance.PlaySound(colectar1);
-            Destroy(gameObject);
         }
     }
 }
