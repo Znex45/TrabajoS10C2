@@ -98,7 +98,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.1666666
-    functionName: Explosion.Destruir()
+    functionName: DestruirEnemigo
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: c1c428dfdd2234848b213b021c1ae882, type: 3}
     floatParameter: 0
