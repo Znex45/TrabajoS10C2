@@ -20,33 +20,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // --- Movimiento lateral ---
+
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * speed, rb.linearVelocity.y);
 
-        // Animación de correr
+
         anim.SetFloat("eje x", Mathf.Abs(moveInput));
 
-        // Voltear sprite
         if (moveInput > 0) sr.flipX = false;
         else if (moveInput < 0) sr.flipX = true;
 
-        // --- Salto ---
+
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
-            anim.SetBool("floor", false);  // al saltar deja de estar en el suelo
+            anim.SetBool("floor", false);  
         }
 
-        // Actualizamos el parámetro floor siempre
+
         anim.SetBool("floor", isGrounded);
     }
 
-    // Detecta cuando toca el suelo
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground")) // asegúrate que el suelo tenga el tag "Ground"
+        if (collision.gameObject.CompareTag("Ground")) 
         {
             isGrounded = true;
             anim.SetBool("floor", true); // vuelve al suelo
