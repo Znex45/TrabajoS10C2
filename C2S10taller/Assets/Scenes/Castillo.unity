@@ -3854,6 +3854,7 @@ MonoBehaviour:
   jumpForce: 10
   Salto: {fileID: 8300000, guid: 27c0202d20c5f1c45bad954cf574fd1d, type: 3}
   caida: {fileID: 8300000, guid: fb1f06491f90a3f478ea7767aa8e1cc0, type: 3}
+  Muerte: {fileID: 0}
 --- !u!1 &1142268606
 GameObject:
   m_ObjectHideFlags: 0
@@ -4061,6 +4062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Snow
+  logTimeOnTransition: 0
 --- !u!1001 &1325020867
 PrefabInstance:
   m_ObjectHideFlags: 0

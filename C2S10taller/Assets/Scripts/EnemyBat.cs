@@ -11,6 +11,13 @@ public class EnemyBat : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private AudioClip Boom;
 
+    [Header("Puntos por matar al murcielago")]
+    [SerializeField] private int puntosPorMatar = 50;
+
+    // NUEVO: contador global de enemigos eliminados
+    private static int killedCount = 0;
+    public static int GetKilledCount() => killedCount;
+
     private Rigidbody2D rb;
     private Vector2 movement;
     private SpriteRenderer sr;
@@ -70,7 +77,7 @@ public class EnemyBat : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
-    // Método para recibir daño
+    // Metodo para recibir dano
     public void RecibirDaño(float cantidad)
     {
         vida -= cantidad;
@@ -81,18 +88,28 @@ public class EnemyBat : MonoBehaviour
         }
     }
 
-    // Método cuando muere
+    // Metodo cuando muere
     private void Muerte()
     {
-        Debug.Log("¡Murió el murciélago!");
+        Debug.Log("Murio el murcielago!");
 
-        // yamar explosión
+        // explosion + sonido (si estan asignados)
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        }
+        if (ControladorSonidos.Instance != null && Boom != null)
+        {
             ControladorSonidos.Instance.PlaySound(Boom);
         }
 
-        Destroy(gameObject); // eliminar enemigo
+        // sumar puntos al marcador y aumentar contador global
+        CollectibleItem.AddScore(puntosPorMatar);
+        killedCount++;
+
+        // eliminar enemigo
+        Destroy(gameObject);
     }
 }
+
+
