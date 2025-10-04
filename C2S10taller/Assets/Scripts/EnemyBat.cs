@@ -15,7 +15,7 @@ public class EnemyBat : MonoBehaviour
     private SpriteRenderer sr;
     private bool colisionplayer;
     private Animator animator;
-    [SerializeField] private AudioClip Explosion;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,7 +89,6 @@ public class EnemyBat : MonoBehaviour
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            ControladorSonidos.Instance.PlaySound(Explosion);
         }
 
         Destroy(gameObject); // eliminar enemigo
