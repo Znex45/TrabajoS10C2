@@ -39,7 +39,7 @@ public class PlataformaMovil : MonoBehaviour
         }
     }
 
-   
+    // ✅ CORREGIDO: ahora sí funcionan
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
