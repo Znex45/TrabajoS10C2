@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sr;
 
     private bool isGrounded = true;
-
+    [SerializeField] private AudioClip Salto;
+    [SerializeField] private AudioClip Caida;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,7 +36,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
-            anim.SetBool("floor", false);  
+            anim.SetBool("floor", false);
+            ControladorSonidos.Instance.PlaySound(Salto);
         }
 
 
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             anim.SetBool("floor", true); // vuelve al suelo
+            ControladorSonidos.Instance.PlaySound(Caida);
         }
     }
 
