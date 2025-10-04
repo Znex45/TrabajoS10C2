@@ -51,4 +51,8 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("floor", true); // vuelve al suelo
         }
     }
+
+
+
+
 }
