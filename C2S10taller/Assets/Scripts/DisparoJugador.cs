@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DisparoJugador : MonoBehaviour
 {
-    [SerializeField] private Transform controladorDisparo;
-    [SerializeField] private GameObject bala;
+    [SerializeField] private Transform controladorDisparo; // punto desde donde sale la bala
+    [SerializeField] private GameObject balaPrefab;
     [SerializeField] private float velocidadBala = 10f;
 
     private void Update()
@@ -16,24 +16,22 @@ public class DisparoJugador : MonoBehaviour
 
     private void Disparar()
     {
-
-        GameObject nuevaBala = Instantiate(bala, controladorDisparo.position, Quaternion.identity);
+        // Instanciamos la bala en la posición y con la rotación del jugador
+        GameObject nuevaBala = Instantiate(balaPrefab, controladorDisparo.position, transform.rotation);
 
         Rigidbody2D rb = nuevaBala.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
+            // Usamos la derecha del jugador (transform.right) como dirección real
+            Vector2 direccion = transform.right;
 
-            float direccion = transform.localScale.x;
+            rb.linearVelocity = direccion * velocidadBala;
 
-
-            rb.linearVelocity = new Vector2(direccion * velocidadBala, 0f);
-
-
+            // Aseguramos que la escala de la bala coincida con la dirección
             Vector3 escala = nuevaBala.transform.localScale;
-            escala.x = direccion * Mathf.Abs(escala.x);
+            escala.x = Mathf.Sign(direccion.x) * Mathf.Abs(escala.x);
             nuevaBala.transform.localScale = escala;
         }
-
 
         Destroy(nuevaBala, 3f);
     }
