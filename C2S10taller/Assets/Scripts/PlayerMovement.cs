@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 startPosition; // guardar la posición inicial
     [SerializeField] private AudioClip Salto;
     [SerializeField] private AudioClip caida;
+    [SerializeField] private AudioClip Muerte;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -83,5 +84,6 @@ public class PlayerMovement : MonoBehaviour
         // Resetear estados
         isDead = false;
         anim.SetBool("floor", true);
+        ControladorSonidos.Instance.PlaySound(Muerte);
     }
 }

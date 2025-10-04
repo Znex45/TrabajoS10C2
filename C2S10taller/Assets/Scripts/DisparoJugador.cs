@@ -5,7 +5,7 @@ public class DisparoJugador : MonoBehaviour
     [SerializeField] private Transform controladorDisparo; // punto desde donde sale la bala
     [SerializeField] private GameObject balaPrefab;
     [SerializeField] private float velocidadBala = 10f;
-
+    [SerializeField] private AudioClip Disparo;
     private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -31,6 +31,7 @@ public class DisparoJugador : MonoBehaviour
             Vector3 escala = nuevaBala.transform.localScale;
             escala.x = Mathf.Sign(direccion.x) * Mathf.Abs(escala.x);
             nuevaBala.transform.localScale = escala;
+            ControladorSonidos.Instance.PlaySound(Disparo);
         }
 
         Destroy(nuevaBala, 3f);
