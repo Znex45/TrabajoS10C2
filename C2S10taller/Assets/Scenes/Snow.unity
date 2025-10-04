@@ -3105,6 +3105,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1688384312}
+    - target: {fileID: 1762431109687030633, guid: ac13eae620208484697c48e7b2d0524a, type: 3}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 8300000, guid: 2cab6c969bdf2654bab352d2fc4c922e, type: 3}
     - target: {fileID: 8055601249827515079, guid: ac13eae620208484697c48e7b2d0524a, type: 3}
       propertyPath: m_Name
       value: Bat-Enemy (1)
@@ -3183,6 +3187,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3907035898526688275, guid: b8c11db15a2f36f4c87a781935d24bb8, type: 3}
+      propertyPath: Caida
+      value: 
+      objectReference: {fileID: 8300000, guid: fb1f06491f90a3f478ea7767aa8e1cc0, type: 3}
+    - target: {fileID: 3907035898526688275, guid: b8c11db15a2f36f4c87a781935d24bb8, type: 3}
+      propertyPath: Salto
+      value: 
+      objectReference: {fileID: 8300000, guid: 27c0202d20c5f1c45bad954cf574fd1d, type: 3}
     - target: {fileID: 3907035898526688275, guid: b8c11db15a2f36f4c87a781935d24bb8, type: 3}
       propertyPath: speed
       value: 3
@@ -4996,6 +5008,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1688384312}
+    - target: {fileID: 1762431109687030633, guid: ac13eae620208484697c48e7b2d0524a, type: 3}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 8300000, guid: 2cab6c969bdf2654bab352d2fc4c922e, type: 3}
     - target: {fileID: 1762431109687030633, guid: ac13eae620208484697c48e7b2d0524a, type: 3}
       propertyPath: explosionPrefab
       value: 
