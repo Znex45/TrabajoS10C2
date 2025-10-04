@@ -176,12 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09afb9ea5323928499bf0906a8d49bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7348476199794658292, guid: b8c11db15a2f36f4c87a781935d24bb8, type: 3}
+  player: {fileID: 0}
   detectionRadius: 1.5
   speed: 0.6
   framesToReset: 100
-  vida: 3
-  explosionPrefab: {fileID: 2796845783447327225, guid: b4c2199ccf4256a4e815fcdc9d916791, type: 3}
 --- !u!95 &5423046976448979106
 Animator:
   serializedVersion: 7
