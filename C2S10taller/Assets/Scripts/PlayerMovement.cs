@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = true;
     private bool isDead = false;   // para controlar si está muerto
     private Vector3 startPosition; // guardar la posición inicial
-
+    [SerializeField] private AudioClip Salto;
+    [SerializeField] private AudioClip caida;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
             anim.SetBool("floor", false);
+            ControladorSonidos.Instance.PlaySound(Salto);
         }
 
         anim.SetBool("floor", isGrounded);
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             anim.SetBool("floor", true);
+            ControladorSonidos.Instance.PlaySound(caida);
         }
 
         // Si toca un enemigo → morir
