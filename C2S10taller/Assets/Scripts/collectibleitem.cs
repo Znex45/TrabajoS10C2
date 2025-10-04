@@ -6,11 +6,12 @@ public class CollectibleItem : MonoBehaviour
     [SerializeField] private string itemName;     // "Monedita" o "Copo" (si lo dejas vacío usa el nombre del objeto)
     [SerializeField] private int itemValue = 1;   // Puntos que suma al score (si <=0 se usa 1)
 
-    private static int monedas, copos, score;
-    private static TMP_Text uiMonedas, uiCopos, uiScore;
+    private static int monedas, copos, bananas, score;
+    private static TMP_Text uiMonedas, uiCopos, uiBananas, uiScore;
 
     private const string LABEL_MONEDAS = "monedas recogidas: ";
     private const string LABEL_COPOS = "copos recogidos: ";
+    private const string LABEL_BANANAS = "bananas recogidas: ";
     private const string LABEL_SCORE = "SCORE: ";
 
     private static void RefrescarUI()
@@ -26,6 +27,11 @@ public class CollectibleItem : MonoBehaviour
             var go = GameObject.Find("TextCopos");
             if (go) uiCopos = go.GetComponent<TMP_Text>();
         }
+        if (!uiBananas)
+        {
+            var go = GameObject.Find("TextBananas");
+            if (go) uiBananas = go.GetComponent<TMP_Text>();
+        }
         if (!uiScore)
         {
             var go = GameObject.Find("TextPuntaje");
@@ -34,6 +40,7 @@ public class CollectibleItem : MonoBehaviour
 
         if (uiMonedas) uiMonedas.text = LABEL_MONEDAS + monedas;
         if (uiCopos) uiCopos.text = LABEL_COPOS + copos;
+        if (uiBananas) uiBananas.text = LABEL_BANANAS + bananas;
         if (uiScore) uiScore.text = LABEL_SCORE + score;
     }
 
@@ -50,6 +57,7 @@ public class CollectibleItem : MonoBehaviour
         // Conteos (1 por ítem recogido)
         if (n.Contains("moneda")) monedas += 1;
         else if (n.Contains("copo")) copos += 1;
+        else if (n.Contains("banana") || n.Contains("banano") || n.Contains("platan") || n.Contains("plátan")) bananas += 1;
 
         // Puntaje total
         score += puntos;
@@ -61,7 +69,7 @@ public class CollectibleItem : MonoBehaviour
     // Útil si quieres reiniciar desde un botón/otro script
     public static void ResetAll()
     {
-        monedas = copos = score = 0;
+        monedas = copos = bananas = score = 0;
         RefrescarUI();
     }
 }
