@@ -9,6 +9,7 @@ public class EnemyBat : MonoBehaviour
     public int framesToReset = 10;
     [SerializeField] private float vida = 3f;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private AudioClip Boom;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -89,6 +90,7 @@ public class EnemyBat : MonoBehaviour
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            ControladorSonidos.Instance.PlaySound(Boom);
         }
 
         Destroy(gameObject); // eliminar enemigo
